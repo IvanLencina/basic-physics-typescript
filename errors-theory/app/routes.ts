@@ -1,17 +1,17 @@
 import * as express from 'express';
-import {ExampleController} from "./controllers/example.controller";
 import bodyParser from "body-parser";
 import {App} from "./app";
 import {inject, injectable} from "inversify";
 import {IRouter} from "./interfaces/router.interface";
+import {ErrorsController} from "./controllers/errors.controller";
 
 @injectable()
 export class Router implements IRouter {
   private appInstance = express.application;
-  private exampleController: ExampleController;
+  private errorsController: ErrorsController;
 
-  constructor(@inject(ExampleController) exampleController: ExampleController) {
-    this.exampleController = exampleController;
+  constructor(@inject(ErrorsController) errorsController: ErrorsController) {
+    this.errorsController = errorsController;
   }
 
   public init(app: App) {
@@ -32,8 +32,8 @@ export class Router implements IRouter {
         response.send('Welcome to the node + typescript example');
       });
 
-    this.appInstance.route('/examples')
-      .get(this.exampleController.getAll.bind(this.exampleController))
-      .post(this.exampleController.create.bind(this.exampleController))
+    // this.appInstance.route('/examples')
+    //   .get(this.exampleController.getAll.bind(this.exampleController))
+    //   .post(this.exampleController.create.bind(this.exampleController))
   }
 }
