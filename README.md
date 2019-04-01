@@ -2,6 +2,8 @@
 
 This project provides basic physics theorems implementation.
 
+**IMPORTANT:** Each folder is a different project. It means that it is necessary to step over the directory of the topic that you want to analyze and run these commands:
+
 ## Installation
 
 ```bash
