@@ -1,12 +1,18 @@
 import * as express from 'express';
-import {injectable} from "inversify";
+import {inject, injectable} from "inversify";
+import {MeasurementRepository} from "../repositories/measurement.repository";
 
 @injectable()
 export class ErrorsController {
 
-  constructor() {}
+  private measurementRepository: MeasurementRepository;
 
-  public getAll(request: express.Request, response: express.Response) {
-    response.send('');
+  constructor(@inject(MeasurementRepository) measurementRepository: MeasurementRepository) {
+    this.measurementRepository = measurementRepository;
+  }
+
+  getStandardError (request: express.Request, response: express.Response) {
+    const measurements = this.measurementRepository.getAll();
+    response.send(measurements);
   };
 }

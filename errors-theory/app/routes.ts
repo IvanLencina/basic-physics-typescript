@@ -28,12 +28,6 @@ export class Router implements IRouter {
 
   private intializeRoutes() {
     this.appInstance.route('/')
-      .get((request: express.Request, response: express.Response) => {
-        response.send('Welcome to the node + typescript example');
-      });
-
-    // this.appInstance.route('/examples')
-    //   .get(this.exampleController.getAll.bind(this.exampleController))
-    //   .post(this.exampleController.create.bind(this.exampleController))
+      .get(this.errorsController.getStandardError.bind(this.errorsController))
   }
 }
