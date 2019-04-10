@@ -1,28 +1,31 @@
 import * as express from 'express';
 import {inject, injectable} from "inversify";
-import {MeasurementRepository} from "../repositories/measurement.repository";
-import {MeasurementService} from "../services/measurement.service";
+import {MirrorRepository} from "../repositories/mirrorRepository";
+import {ConcaveMirrorService} from "../services/concaveMirrorService";
+import {MirrorTypes} from "../enumerations/mirror-types";
+import {ReflectiveRay} from "../entities/reflective-ray";
 
 @injectable()
 export class ReflectionController {
 
-  private measurementRepository: MeasurementRepository;
-  private measurementService: MeasurementService;
+  private mirrorRepository: MirrorRepository;
+  private concaveMirrorService: ConcaveMirrorService;
 
   constructor(
-    @inject(MeasurementRepository) measurementRepository: MeasurementRepository,
-    @inject(MeasurementService) measurementService: MeasurementService
+    @inject(MirrorRepository) mirrorRepository: MirrorRepository,
+    @inject(ConcaveMirrorService) concaveMirrorService: ConcaveMirrorService
   ) {
-    this.measurementRepository = measurementRepository;
-    this.measurementService = measurementService
+    this.mirrorRepository = mirrorRepository;
+    this.concaveMirrorService = concaveMirrorService
   }
 
   getResults (request: express.Request, response: express.Response) {
-    // const measurements = this.measurementRepository.getAll();
-    //
-    // const standardError = this.measurementService.calculateStandardError(measurements);
-    //
-    // response.send(standardError);
-    response.send('working')
+    const concaveMirror = this.mirrorRepository.getMirror(MirrorTypes.Concave, 4);
+    const reflectiveRay = new ReflectiveRay(10, 2);
+    const concaveMirrorResults = this.concaveMirrorService.calculateResult(concaveMirror, reflectiveRay);
+
+    response.send(
+      `<p>${concaveMirrorResults.problem}</p>
+    `);
   };
 }
