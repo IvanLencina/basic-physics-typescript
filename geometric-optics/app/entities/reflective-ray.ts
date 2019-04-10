@@ -1,17 +1,17 @@
 export class ReflectiveRay {
   private height: number | undefined;
-  private mirrorVerticeDistance: number;
+  private mirrorVertexDistance: number;
 
-  constructor(mirrorVerticeDistance: number, height?: number) {
+  constructor(mirrorVertexDistance: number, height?: number) {
     this.height = height;
-    this.mirrorVerticeDistance = mirrorVerticeDistance;
+    this.mirrorVertexDistance = mirrorVertexDistance;
   }
 
   public getHeight(): number | undefined {
     return this.height;
   }
 
-  public getMirrorVerticeDistance(): number {
-    return this.mirrorVerticeDistance;
+  public getMirrorVertexDistance(): number {
+    return this.mirrorVertexDistance;
   }
 }

@@ -26,6 +26,10 @@ export class ReflectionController {
 
     response.send(
       `<p>${concaveMirrorResults.problem}</p>
+        <strong>Results:</strong><br>
+        Distance of the image: ${concaveMirrorResults.results.distanceOfImage}cm<br>
+        Image height: ${concaveMirrorResults.results.imageHeight}cm<br>
+        Image Analysis: ${concaveMirrorResults.results.imageAnalysis}
     `);
   };
 }
