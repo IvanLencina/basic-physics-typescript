@@ -24,8 +24,9 @@ export class ReflectionController {
     const reflectiveRay = new ReflectiveRay(10, 2);
     const concaveMirrorResults = this.concaveMirrorService.calculateResult(concaveMirror, reflectiveRay);
 
-    response.send(
-      `<p>${concaveMirrorResults.problem}</p>
+    response.send(`
+      <strong>Concave mirror</strong><br>
+      <p>${concaveMirrorResults.problem}</p>
         <strong>Results:</strong><br>
         Distance of the image: ${concaveMirrorResults.results.distanceOfImage}cm<br>
         Image height: ${concaveMirrorResults.results.imageHeight}cm<br>
