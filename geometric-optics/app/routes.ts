@@ -4,14 +4,20 @@ import {App} from "./app";
 import {inject, injectable} from "inversify";
 import {IRouter} from "./interfaces/router.interface";
 import {ReflectionController} from "./controllers/reflectionController";
+import {RefractionController} from "./controllers/refractionController";
 
 @injectable()
 export class Router implements IRouter {
   private appInstance = express.application;
   private reflectionController: ReflectionController;
+  private refractionController: RefractionController;
 
-  constructor(@inject(ReflectionController) reflectionController: ReflectionController) {
+  constructor(
+    @inject(ReflectionController) reflectionController: ReflectionController,
+    @inject(RefractionController) refractionController: RefractionController
+  ) {
     this.reflectionController = reflectionController;
+    this.refractionController = refractionController;
   }
 
   public init(app: App) {
@@ -35,6 +41,9 @@ export class Router implements IRouter {
       });
 
     this.appInstance.route('/reflection')
-      .get(this.reflectionController.getResults.bind(this.reflectionController))
+      .get(this.reflectionController.getResults.bind(this.reflectionController));
+
+    this.appInstance.route('/refraction')
+      .get(this.refractionController.getResults.bind(this.refractionController));
   }
 }
