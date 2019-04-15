@@ -11,12 +11,12 @@ export class RefractionService {
     // We have that n1.senθ1 = n2.senθ2
     // So clearing: (n1.senθ1)/n2 = senθ2
     // @ts-ignore
-    const senTheta2 = (firstMedium.getRefractiveIndex() * Math.sin(angleOfIncidenceInRadian)) / secondMedium.getRefractiveIndex();
-    const cosecant = this.getCosecant(senTheta2);
+    const senTheta2: number = (firstMedium.getRefractiveIndex() * Math.sin(angleOfIncidenceInRadian)) / secondMedium.getRefractiveIndex();
+    const arcsine: number = Math.asin(senTheta2);
 
     return {
-      radians: cosecant,
-      degrees: this.convertRadianToDegrees(cosecant)
+      radians: arcsine,
+      degrees: this.convertRadianToDegrees(arcsine)
     }
   }
 
@@ -26,9 +26,5 @@ export class RefractionService {
 
   private convertRadianToDegrees(angle: number): number {
     return angle * (180.0 / Math.PI);
-  }
-
-  private getCosecant(number: number) {
-    return 1 / Math.sin(number);
   }
 }
