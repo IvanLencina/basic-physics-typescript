@@ -20,12 +20,12 @@ export class RefractionService {
     }
   }
 
-  private convertDegreesToRadian(number: number): number {
-    return ((number * Math.PI) / 180.0);
+  private convertDegreesToRadian(angle: number): number {
+    return angle * (Math.PI / 180.0);
   }
 
-  private convertRadianToDegrees(number: number): number {
-    return ((number * 180.0) / Math.PI);
+  private convertRadianToDegrees(angle: number): number {
+    return angle * (180.0 / Math.PI);
   }
 
   private getCosecant(number: number) {
